@@ -1,27 +1,31 @@
 
 class corzineSort(){
-    constructor( choiceOptions= ["red", "green", "blue", "yellow"], choiceCaps= {"red": 20, "green": 20, "blue":20, "yellow":20}){
-        this.list = []
-        this.choiceOptions = Object.keys(choiceCaps)
+    constructor( choiceCaps= {"red": 20, "green": 20, "blue":20, "yellow":20}){
         this.choiceCaps = choiceCaps
         this.placements = setPlacements()
     }
-}
 
+    setPlacements(){
+        let placements = {}
+        choiceOptions.forEach( color => placements[color] = []) 
+        return placements   
+    }
 
-setPlacements(){
-    possibleColors = {}
-    this.choiceOptions.keys.forEach( color => possibleColors.push(el))
-}
+    placeStudent(studentHash){
+        let choices = Object.keys(studentHash)
+        choices.forEach( color =>{
+            if (typeof color == 'number'){
+                return
+            } else if (choiceCaps[color] <= placements[color].length() ){
+                placements[color].push(studentHash.name)
+            }
+        })
+    }
+  
+    placeStudents(studentsHash){
+        studentsHash.forEach( studentHash => {
+            this.placeStudent(studentHash)
+        })
+    }
 
-placeStudent(studentHash){
-   
-}
-
-sortStudentsPriority(){
-}
-
-
-placeStudents(){
-    studentHash.forEach
 }
