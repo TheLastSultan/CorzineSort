@@ -3,13 +3,13 @@ class corzineSort(){
     constructor( choiceCaps= {"red": 20, "green": 20, "blue":20, "yellow":20}){
         this.choiceCaps = choiceCaps
         this.placements = setPlacements()
-    }
+    };
 
     setPlacements(){
         let placements = {}
         choiceOptions.forEach( color => placements[color] = []) 
         return placements   
-    }
+    };
 
     placeStudent(studentHash){
         let choices = Object.keys(studentHash)
@@ -20,12 +20,12 @@ class corzineSort(){
                 placements[color].push(studentHash.name)
             }
         })
-    }
+    };
   
     placeStudents(studentsHash){
         studentsHash.forEach( studentHash => {
             this.placeStudent(studentHash)
         })
-    }
+    };
 
-}
+};

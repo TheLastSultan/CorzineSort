@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/TheLastSultan/CorzineSort/issues"
   },
-  "homepage": "https://github.com/TheLastSultan/CorzineSort#readme"
+  "homepage": "https://github.com/TheLastSultan/CorzineSort#readme",
+  "dependencies": {
+    "webpack": "^4.25.1"
+  }
 }
