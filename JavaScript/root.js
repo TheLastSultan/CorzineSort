@@ -1,3 +1,7 @@
+import { Student, parseStudents } from "./student.js";
+
+let studentData = undefined;
+
 $(document).ready(function() {
   // The event listener for the file upload
   document
@@ -27,7 +31,8 @@ $(document).ready(function() {
         data = $.csv.toArrays(csvData);
         if (data && data.length > 0) {
           alert("Imported -" + data.length + "- rows successfully!");
-          console.log(data);
+          studentData = data;
+          console.log(JSON.stringify(data));
         } else {
           alert("No data to import!");
         }
@@ -38,3 +43,6 @@ $(document).ready(function() {
     }
   }
 });
+
+// let studentData = parseStudents(studentData);
+console.log(studentData);
