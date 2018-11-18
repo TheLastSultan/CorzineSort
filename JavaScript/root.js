@@ -84,7 +84,7 @@ function appendData(placements) {
       handle: ".list-group-item",
       animation: 150,
       group: "list",
-      onEnd: function(event) {
+      onAdd: function(event) {
         let newColor = event.to.classList[1];
         $(event.item).data("group", newColor);
         debugger;
