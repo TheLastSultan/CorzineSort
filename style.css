@@ -1,0 +1,40 @@
+body.dragging,
+body.dragging * {
+  cursor: move !important;
+}
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ol.example li.placeholder {
+  position: relative;
+  /** More li styles **/
+}
+ol.example li.placeholder:before {
+  position: absolute;
+  /** Define arrowhead **/
+}
+
+#body {
+  width: 90%;
+  margin: auto;
+}
+
+.glyphicon-move {
+  cursor: move;
+  cursor: -webkit-grabbing;
+}
+
+.list-group {
+  margin-right: 4%;
+  margin-left: 4%;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  padding-left: 3%;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 15px;
+}

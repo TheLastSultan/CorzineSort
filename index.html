@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>CorzineSort</title>
+    <meta name="description" content="Corzine Sort for Optometry Students" />
+    <meta name="author" content="SitePoint" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- External Libraries and helpers -->
+    <script src="http://rubaxa.github.io/Sortable/Sortable.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="JavaScript/jquery-csv.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.6.0/Sortable.js"
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+      integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Upload Files -->
+    <script src="./bundle.js"></script>
+  </head>
+
+  <body id="body">
+    <div id="pageHeader">
+      <h1>Corzine Sort</h1>
+      <small> Version 1.0.5; Updated 18 November 2018. </small>
+    </div>
+</br>
+    <div id="dvImportSegments" class="fileupload ">
+      <fieldset>
+        <legend>Upload your CSV File</legend>
+        <input
+          type="file"
+          name="File Upload"
+          id="txtFileUpload"
+          accept=".csv"
+        />
+      </fieldset>
+    </div>
+    <div class="root"></div>
+    </br>
+    <legend>Done Sorting?</legend>
+    <button id=export> Export Results To PDF </button>
+  </body>
+</br>
+</html>

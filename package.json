@@ -1,0 +1,31 @@
+{
+  "name": "for_corzine",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "webpack JavaScript/root.js -o bundle.js --mode=production",
+    "start": "webpack JavaScript/root.js -o bundle.js --mode=development --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheLastSultan/CorzineSort.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheLastSultan/CorzineSort/issues"
+  },
+  "homepage": "https://github.com/TheLastSultan/CorzineSort#readme",
+  "dependencies": {
+    "@tarunbatta/excelexportjs": "^4.0.3",
+    "jquery": "^3.3.1",
+    "sortablejs": "^1.7.0",
+    "webpack": "^4.25.1"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.1.2"
+  }
+}
