@@ -1,6 +1,6 @@
 import Student from "./student.js";
 import CorzineSort from "./corzinesort.js";
-import { excelExportJs } from "./excelExportJs";
+import exportFunction from "./export.js";
 
 let studentsArray = undefined;
 
@@ -102,7 +102,8 @@ function appendData(placements) {
       student["priority"] = $(this).attr("data-priority");
       studentsExport.push(student);
     });
-    console.log($(studentsExport));
-    return $(studentsExport);
+
+    // console.log($(studentsExport));
+    exportFunction(studentsExport, "CorzineSort", true);
   });
 }
