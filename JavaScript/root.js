@@ -59,10 +59,9 @@ function appendData(placements) {
   const colors = Object.keys(placements);
   for (let i = 0; i < colors.length; i++) {
     let color = colors[i];
-    console.log(color);
     let students = placements[color];
     var ul = $(
-      `<div id='listWithHandle' class='list-group ${color}'> <h3 class='heading'>${color}</h3>`
+      `<div id='listWithHandle${i}' class='list-group ${color}'> <h3 class='heading'>${color}</h3>`
     );
     for (let i = 0; i < students.length; i++) {
       let student = students[i];
@@ -76,23 +75,13 @@ function appendData(placements) {
     }
     $("body").append(ul);
   }
-}
 
-// <!-- List with handle -->
-// <div id="listWithHandle" class="list-group">
-//   <div class="list-group-item">
-//     <span class="badge">14</span>
-//     <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
-//     Drag me by the handle
-//   </div>
-//   <div class="list-group-item">
-//     <span class="badge">2</span>
-//     <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
-//     You can also select text
-//   </div>
-//   <div class="list-group-item">
-//     <span class="badge">1</span>
-//     <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
-//     Best of both worlds!
-//   </div>
-// </div>
+  for (let i = 0; i < colors.length; i++) {
+    let listWithHandle = `listWithHandle${i}`;
+    Sortable.create(window[listWithHandle], {
+      handle: ".list-group-item",
+      animation: 150,
+      group: "list"
+    });
+  }
+}
