@@ -1,4 +1,14 @@
-export class Student {
+export default class Student {
+  static parseStudents(studentsArray) {
+    studentsArray.shift();
+    let allStudents = [];
+    studentsArray.forEach(studentArray => {
+      let oneStudent = new Student(studentArray);
+      allStudents.push(oneStudent);
+    });
+    return allStudents;
+  }
+
   constructor(studentArray) {
     this.name = studentArray[0];
     this.priority = studentArray[1];
@@ -14,14 +24,4 @@ export class Student {
     }
     return choices;
   }
-}
-
-export function parseStudents(studentsArray) {
-  studentsArray.shift();
-  let allStudents = [];
-  studentsArray.forEach(studentArray => {
-    oneStudent = new Student(studentArray);
-    allStudents.push(oneStudent);
-  });
-  return allStudents;
 }

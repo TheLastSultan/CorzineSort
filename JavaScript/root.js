@@ -1,6 +1,7 @@
-import { Student, parseStudents } from "./student.js";
+import Student from "./student.js";
+import CorzineSort from "./corzinesort.js";
 
-let studentData = undefined;
+let studentsArray = undefined;
 
 $(document).ready(function() {
   // The event listener for the file upload
@@ -31,8 +32,8 @@ $(document).ready(function() {
         data = $.csv.toArrays(csvData);
         if (data && data.length > 0) {
           alert("Imported -" + data.length + "- rows successfully!");
-          studentData = data;
-          console.log(JSON.stringify(data));
+          printOutData(data);
+          //   console.log(JSON.stringify(data));
         } else {
           alert("No data to import!");
         }
@@ -44,5 +45,12 @@ $(document).ready(function() {
   }
 });
 
-// let studentData = parseStudents(studentData);
-console.log(studentData);
+function printOutData(studentsArray) {
+  const studentsHash = Student.parseStudents(studentsArray);
+  const corzine = new CorzineSort(studentsHash);
+  corzine.placeStudents();
+  const placements = corzine.placements;
+  const announceMetrics = corzine.announceMetrics;
+  console.log(placements);
+  console.log(announceMetrics);
+}
