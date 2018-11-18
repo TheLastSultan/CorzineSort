@@ -18,11 +18,23 @@ ol.example li.placeholder:before {
   /** Define arrowhead **/
 }
 
-body {
-  margin: 10px;
+#body {
+  width: 90%;
+  margin: auto;
 }
 
 .glyphicon-move {
   cursor: move;
   cursor: -webkit-grabbing;
+}
+
+.list-group {
+  margin-right: 4%;
+  margin-left: 4%;
+  margin-top: 1%;
+  margin-bottom: 2%;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

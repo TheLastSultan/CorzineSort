@@ -24,4 +24,11 @@ export default class Student {
     }
     return choices;
   }
+
+  toJSON() {
+    return {
+      name: this.name,
+      priority: this.priority
+    };
+  }
 }

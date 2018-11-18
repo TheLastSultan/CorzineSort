@@ -61,15 +61,17 @@ function appendData(placements) {
     let color = colors[i];
     let students = placements[color];
     var ul = $(
-      `<div id='listWithHandle${i}' class='list-group ${color}'> <h3 class='heading'>${color}</h3>`
+      `<ul id='listWithHandle${i}' class='list-group ${color} col-md-3'> <h3 class='heading'>${color}</h3>`
     );
     for (let i = 0; i < students.length; i++) {
       let student = students[i];
-      let newdiv = $(`<div class='list-group-item'>
+      let newdiv = $(`<li class='list-group-item' data-name=${student.name} 
+                        data-priority=${student.priority}
+                        data-group=${color}>
                         <span class='badge'> ${student.lastChoice}</span>
                         <span class='glyphicon glyphicon-move' aria-hidden='true'></span>
                         ${student.name} 
-                        </div>                 
+                        </li>                 
       `);
       ul.append(newdiv);
     }
@@ -81,7 +83,19 @@ function appendData(placements) {
     Sortable.create(window[listWithHandle], {
       handle: ".list-group-item",
       animation: 150,
-      group: "list"
+      group: "list",
+      onEnd: function(event) {
+        let newColor = event.to.classList[1];
+        $(event.item).data("group", newColor);
+        debugger;
+      }
     });
   }
+  $("#listWithHandle0").on("sortupdate", sortableEvent => {
+    debugger;
+    const { source, over } = sortableEvent;
+    source.getAttribute("data-group") == over.getAttribute("data-group");
+    console.log(source.getAttribute("data-group"));
+    console.log(source.getAttribute("data-group"));
+  });
 }
