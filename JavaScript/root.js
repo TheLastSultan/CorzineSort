@@ -64,6 +64,7 @@ function appendData(placements) {
     var ul = $(
       `<ul id='listWithHandle${i}' class='list-group g-${color} col-md-3'> <h3 class='heading'>${color}</h3>`
     );
+    ul.css("border", `5px solid ${color}`);
     for (let i = 0; i < students.length; i++) {
       let student = students[i];
       let newdiv = $(`<li class='list-group-item p-${student.priority}' 
