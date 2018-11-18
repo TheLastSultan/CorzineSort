@@ -61,11 +61,38 @@ function appendData(placements) {
     let color = colors[i];
     console.log(color);
     let students = placements[color];
-    var ul = $(`<ul class=${color}> <h1 class='heading'>${color}</h1>`);
+    var ul = $(
+      `<div id='listWithHandle' class='list-group ${color}'> <h3 class='heading'>${color}</h3>`
+    );
     for (let i = 0; i < students.length; i++) {
       let student = students[i];
-      ul.append(`<li class=${student.lastChoice}>${student.name}`);
+      let newdiv = $(`<div class='list-group-item'>
+                        <span class='badge'> ${student.lastChoice}</span>
+                        <span class='glyphicon glyphicon-move' aria-hidden='true'></span>
+                        ${student.name} 
+                        </div>                 
+      `);
+      ul.append(newdiv);
     }
     $("body").append(ul);
   }
 }
+
+// <!-- List with handle -->
+// <div id="listWithHandle" class="list-group">
+//   <div class="list-group-item">
+//     <span class="badge">14</span>
+//     <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+//     Drag me by the handle
+//   </div>
+//   <div class="list-group-item">
+//     <span class="badge">2</span>
+//     <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+//     You can also select text
+//   </div>
+//   <div class="list-group-item">
+//     <span class="badge">1</span>
+//     <span class="glyphicon glyphicon-move" aria-hidden="true"></span>
+//     Best of both worlds!
+//   </div>
+// </div>
