@@ -29,7 +29,7 @@ export default class CorzineSort {
         this.placements[color].push(studentObj);
         studentObj.placement = color;
         studentObj.lastChoice = i + 1;
-        studentObj.priority += i;
+        studentObj.priority = i;
         this.metrics[i] += 1;
         break;
       }

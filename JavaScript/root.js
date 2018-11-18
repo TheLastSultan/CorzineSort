@@ -62,11 +62,12 @@ function appendData(placements) {
     let color = colors[i];
     let students = placements[color];
     var ul = $(
-      `<ul id='listWithHandle${i}' class='list-group ${color} col-md-3'> <h3 class='heading'>${color}</h3>`
+      `<ul id='listWithHandle${i}' class='list-group g-${color} col-md-3'> <h3 class='heading'>${color}</h3>`
     );
     for (let i = 0; i < students.length; i++) {
       let student = students[i];
-      let newdiv = $(`<li class='list-group-item' id=${student.name} 
+      let newdiv = $(`<li class='list-group-item p-${student.priority}' 
+                        id=${student.name} 
                         data-name=${student.name} 
                         data-priority=${student.priority}
                         data-group=${color}>
@@ -76,6 +77,15 @@ function appendData(placements) {
                         </li>                 
       `);
       ul.append(newdiv);
+      if (student.lastChoice == 1) {
+        newdiv.css("background-color", "lightgreen");
+      } else if (student.lastChoice == 2) {
+        newdiv.css("background-color", "yellow");
+      } else if (student.lastChoice == 3) {
+        newdiv.css("background-color", "orange");
+      } else {
+        newdiv.css("background-color", "indianred");
+      }
     }
     $("body").append(ul);
   }
@@ -98,7 +108,7 @@ function appendData(placements) {
     $(".list-group > li").each(function() {
       let student = {};
       student["name"] = $(this).attr("data-name");
-      student["color"] = $(this).attr("data-group");
+      student["color"] = $(this).data("group");
       student["priority"] = $(this).attr("data-priority");
       studentsExport.push(student);
     });
