@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "deploy": "webpack JavaScript/root.js -o bundle.js --mode=production",
+    "start": "webpack JavaScript/root.js -o bundle.js --mode=development --watch"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,16 @@
   },
   "homepage": "https://github.com/TheLastSultan/CorzineSort#readme",
   "dependencies": {
+    "@babel/core": "^7.1.6",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
     "jquery": "^3.3.1",
+    "lodash": "^4.17.11",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-redux": "^5.1.1",
+    "redux": "^4.0.1",
     "webpack": "^4.25.1"
   },
   "devDependencies": {

@@ -52,5 +52,20 @@ function printOutData(studentsArray) {
   const placements = corzine.placements;
   const announceMetrics = corzine.announceMetrics;
   console.log(placements);
-  console.log(announceMetrics);
+  appendData(placements);
+}
+
+function appendData(placements) {
+  const colors = Object.keys(placements);
+  for (let i = 0; i < colors.length; i++) {
+    let color = colors[i];
+    console.log(color);
+    let students = placements[color];
+    var ul = $(`<ul class=${color}> <h1 class='heading'>${color}</h1>`);
+    for (let i = 0; i < students.length; i++) {
+      let student = students[i];
+      ul.append(`<li class=${student.lastChoice}>${student.name}`);
+    }
+    $("body").append(ul);
+  }
 }
