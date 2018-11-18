@@ -1,5 +1,6 @@
 import Student from "./student.js";
 import CorzineSort from "./corzinesort.js";
+import { excelExportJs } from "./excelExportJs";
 
 let studentsArray = undefined;
 
@@ -65,7 +66,8 @@ function appendData(placements) {
     );
     for (let i = 0; i < students.length; i++) {
       let student = students[i];
-      let newdiv = $(`<li class='list-group-item' data-name=${student.name} 
+      let newdiv = $(`<li class='list-group-item' id=${student.name} 
+                        data-name=${student.name} 
                         data-priority=${student.priority}
                         data-group=${color}>
                         <span class='badge'> ${student.lastChoice}</span>
@@ -87,15 +89,20 @@ function appendData(placements) {
       onAdd: function(event) {
         let newColor = event.to.classList[1];
         $(event.item).data("group", newColor);
-        debugger;
       }
     });
   }
-  $("#listWithHandle0").on("sortupdate", sortableEvent => {
-    debugger;
-    const { source, over } = sortableEvent;
-    source.getAttribute("data-group") == over.getAttribute("data-group");
-    console.log(source.getAttribute("data-group"));
-    console.log(source.getAttribute("data-group"));
+
+  $("#export").click(function() {
+    let studentsExport = [];
+    $(".list-group > li").each(function() {
+      let student = {};
+      student["name"] = $(this).attr("data-name");
+      student["color"] = $(this).attr("data-group");
+      student["priority"] = $(this).attr("data-priority");
+      studentsExport.push(student);
+    });
+    console.log($(studentsExport));
+    return $(studentsExport);
   });
 }
