@@ -48,6 +48,7 @@ $(document).ready(function() {
 
 function printOutData(studentsArray) {
   const studentsHash = Student.parseStudents(studentsArray);
+  console.log(studentsHash);
   const corzine = new CorzineSort(studentsHash);
   corzine.placeStudents();
   const placements = corzine.placements;

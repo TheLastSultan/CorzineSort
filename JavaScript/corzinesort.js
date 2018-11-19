@@ -1,5 +1,16 @@
 export default class CorzineSort {
-  constructor(studentHash, choiceCaps = { Red: 20, Blue: 20, Orange: 20 }) {
+  constructor(
+    studentHash,
+    choiceCaps = {
+      Red: 10,
+      Blue: 11,
+      Green: 11,
+      Orange: 11,
+      Yellow: 11,
+      Brown: 10
+    }
+    // ["Orange", "Blue", "Brown", "Yellow", "Red", "Green"]
+  ) {
     this.choiceCaps = choiceCaps;
     this.placements = this.setPlacements();
     this.studentHash = studentHash;
@@ -25,6 +36,7 @@ export default class CorzineSort {
   placeStudent(studentObj) {
     for (let i = 0; i < studentObj.choices.length; i++) {
       const color = studentObj.choices[i];
+
       if (this.choiceCaps[color] >= this.placements[color].length) {
         this.placements[color].push(studentObj);
         studentObj.placement = color;

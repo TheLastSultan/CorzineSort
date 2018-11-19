@@ -10,17 +10,26 @@ export default class Student {
   }
 
   constructor(studentArray) {
-    this.name = studentArray[0];
-    this.priority = studentArray[1];
+    this.name = studentArray[1];
+    this.priority = studentArray[0];
     this.choices = this.parseChoices(studentArray);
     this.placement = "";
     this.lastChoice = "";
   }
 
   parseChoices(studentArray) {
+    const choiceCodes = {
+      B: "Brown",
+      G: "Green",
+      R: "Red",
+      O: "Orange",
+      L: "Blue",
+      Y: "Yellow"
+    };
     let choices = [];
-    for (let i = 2; i < studentArray.length; i++) {
-      choices.push(studentArray[i]);
+    for (let i = 2; i < 8; i++) {
+      let firstLetter = studentArray[i][0];
+      choices.push(choiceCodes[firstLetter]);
     }
     return choices;
   }
