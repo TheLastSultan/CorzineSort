@@ -18,11 +18,6 @@ export default class Student {
   }
 
   parseChoices(studentArray) {
-<<<<<<< HEAD
-    let choices = [];
-    for (let i = 2; i < studentArray.length; i++) {
-      choices.push(studentArray[i]);
-=======
     const choiceCodes = {
       B: "Brown",
       G: "Green",
@@ -35,7 +30,6 @@ export default class Student {
     for (let i = 2; i < 8; i++) {
       let firstLetter = studentArray[i][0];
       choices.push(choiceCodes[firstLetter]);
->>>>>>> master
     }
     return choices;
   }
