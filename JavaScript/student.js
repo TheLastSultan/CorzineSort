@@ -10,8 +10,8 @@ export default class Student {
   }
 
   constructor(studentArray) {
-    this.name = studentArray[1];
-    this.priority = studentArray[0];
+    this.name = studentArray[0];
+    this.priority = studentArray[1];
     this.choices = this.parseChoices(studentArray);
     this.placement = "";
     this.lastChoice = "";

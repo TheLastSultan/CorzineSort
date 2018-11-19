@@ -9,7 +9,6 @@ export default class CorzineSort {
       Yellow: 11,
       Brown: 10
     }
-    // ["Orange", "Blue", "Brown", "Yellow", "Red", "Green"]
   ) {
     this.choiceCaps = choiceCaps;
     this.placements = this.setPlacements();
