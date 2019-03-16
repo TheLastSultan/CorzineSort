@@ -10,6 +10,8 @@ $(document).ready(function() {
     .getElementById("txtFileUpload")
     .addEventListener("change", upload, false);
 
+  document
+   
   // Method that checks that the browser supports the HTML5 File API
   function browserSupportFileUpload() {
     var isCompatible = false;

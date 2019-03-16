@@ -1,3 +1,5 @@
+// const _ = require('lodash');
+
 export default class CorzineSort {
   constructor(
     studentHash,
@@ -33,6 +35,8 @@ export default class CorzineSort {
   }
 
   placeStudent(studentObj) {
+
+
     for (let i = 0; i < studentObj.choices.length; i++) {
       const color = studentObj.choices[i];
       if (this.choiceCaps[color] >= this.placements[color].length) {
