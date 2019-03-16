@@ -1,4 +1,4 @@
-// const _ = require('lodash');
+const _ = require('lodash');
 
 export default class CorzineSort {
   constructor(
@@ -16,6 +16,7 @@ export default class CorzineSort {
     this.placements = this.setPlacements();
     this.studentHash = studentHash;
     this.metrics = this.setMetrics();
+    this.score = 0
   }
 
   setPlacements() {
@@ -35,11 +36,9 @@ export default class CorzineSort {
   }
 
   placeStudent(studentObj) {
-
-
-    for (let i = 0; i < studentObj.choices.length; i++) {
-      const color = studentObj.choices[i];
-      if (this.choiceCaps[color] >= this.placements[color].length) {
+    for (let i = 0; i < studentObj.choices.length ; i++) {
+      const color = this.encodedChoice(studentObj.choices[i]);
+      if (this.choiceCaps[color] >= (this.placements[color].length + 1)) {
         this.placements[color].push(studentObj);
         studentObj.placement = color;
         studentObj.lastChoice = i + 1;
@@ -56,10 +55,46 @@ export default class CorzineSort {
     return this.placements;
   }
 
+  encodedChoice(studentChoice){
+
+    const choiceCodes = {
+      B: "Brown",
+      G: "Green",
+      R: "Red",
+      O: "Orange",
+      L: "Blue",
+      Y: "Yellow"
+    };
+
+    let priorityLine =  [];
+    studentChoice.split("").forEach( individualChoice =>{
+      const codedChoice = choiceCodes[individualChoice]
+      const rank = this.placements[codedChoice].length
+      priorityLine.push( {codedChoice, rank})
+    })
+
+    // find the emptiest choice in linear time
+    let bestChoice = priorityLine[0];
+    priorityLine.forEach( currChoice => {
+      if (currChoice.rank < bestChoice.rank){
+        bestChoice = currChoice;
+      }
+    });
+
+    return bestChoice.codedChoice
+  }
+
   placeStudents(studentsHash = this.studentHash) {
-    studentsHash.forEach(studentHash => {
+
+    let sortedStudents = _.sortBy( studentsHash, 'priority');
+
+    sortedStudents.forEach(studentHash => {
       this.placeStudent(studentHash);
     });
+
+    // const sum = this.metrics.map( (el, idx) => { return el * idx}, 0)
+    // this.score = _.sum(sum)
+
   }
 
   announceMetrics() {

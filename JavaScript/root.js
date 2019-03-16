@@ -11,7 +11,7 @@ $(document).ready(function() {
     .addEventListener("change", upload, false);
 
   document
-   
+
   // Method that checks that the browser supports the HTML5 File API
   function browserSupportFileUpload() {
     var isCompatible = false;
@@ -49,9 +49,19 @@ $(document).ready(function() {
 });
 
 function printOutData(studentsArray) {
-  const studentsHash = Student.parseStudents(studentsArray);
-  console.log(studentsHash);
-  const corzine = new CorzineSort(studentsHash);
+  let studentsHash = Student.parseStudents(studentsArray);
+  const choiceCaps = {
+    Red: $('#redI').val(),
+    Blue: $('#blueI').val(),
+    Green: $('#greenI').val(),
+    Orange: $('#orangeI').val(),
+    Yellow: $('#yellowI').val(),
+    Brown: $('#brownI').val(),
+  };
+
+
+  // for (let i = 0 ; i < 100; i++)
+  const corzine = new CorzineSort(studentsHash, choiceCaps);
   corzine.placeStudents();
   const placements = corzine.placements;
   const announceMetrics = corzine.announceMetrics;

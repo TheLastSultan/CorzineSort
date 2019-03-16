@@ -26,10 +26,10 @@ export default class Student {
       L: "Blue",
       Y: "Yellow"
     };
-    let choices = [];
+    let choices = [] ;
     for (let i = 2; i < 8; i++) {
-      let firstLetter = studentArray[i][0];
-      choices.push(choiceCodes[firstLetter]);
+      let letters = studentArray[i];
+      choices.push(letters);
     }
     return choices;
   }
