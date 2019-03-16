@@ -1,8 +1,10 @@
 import Student from "./student.js";
 import CorzineSort from "./corzinesort.js";
 import exportFunction from "./export.js";
+import student from "./student";
 
 let studentsArray = undefined;
+let bestCorzine = undefined;
 
 $(document).ready(function() {
   // The event listener for the file upload
@@ -34,7 +36,6 @@ $(document).ready(function() {
         var csvData = event.target.result;
         data = $.csv.toArrays(csvData);
         if (data && data.length > 0) {
-          alert("Imported -" + data.length + "- rows successfully!");
           printOutData(data);
           //   console.log(JSON.stringify(data));
         } else {
@@ -61,15 +62,32 @@ function printOutData(studentsArray) {
 
 
   // for (let i = 0 ; i < 100; i++)
-  const corzine = new CorzineSort(studentsHash, choiceCaps);
-  corzine.placeStudents();
-  const placements = corzine.placements;
-  const announceMetrics = corzine.announceMetrics;
-  console.log(placements);
+
+  bestCorzine = new CorzineSort(studentsHash, choiceCaps);
+  bestCorzine.placeStudents();
+  for( let i = 0 ; i < 10000 ; i++){
+    studentsHash = _.shuffle(studentsHash);
+    const currCorzine = new CorzineSort(studentsHash, choiceCaps);
+    currCorzine.placeStudents();
+    if (currCorzine.score <= bestCorzine.score) bestCorzine = currCorzine
+  }
+  const placements = bestCorzine.placements;
   appendData(placements);
 }
 
+
 function appendData(placements) {
+  // $("body").append($(`<p> ${bestCorzine.announceMetrics()} </p>`) );
+  $("body").append($(`<br/> <div id="alert" class="alert alert-warning">
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h2 class="alert-heading">Holy guacamole!</h2> <h4> We just went through 10,000 permutations for the best match. ${bestCorzine.announceMetrics()} </h4>
+  <hr>
+  <h4> Don't forget that you can grab each student by the Arow Icon and place them into different groups before exporting! </h4>
+</div>`) );
+
+
   const colors = Object.keys(placements);
   for (let i = 0; i < colors.length; i++) {
     let color = colors[i];
@@ -77,13 +95,14 @@ function appendData(placements) {
     var ul = $(
       `<ul id='listWithHandle${i}' class='list-group g-${color} col-md-3'> <h3 class='heading'>${color}</h3>`
     );
-    ul.css("border", `5px solid ${color}`);
+    ul.css("border", `2px solid ${color}`);
+    ul.css("padding", `10px`);
     for (let i = 0; i < students.length; i++) {
       let student = students[i];
       let newdiv = $(`<li class='list-group-item p-${student.priority}' 
                         id=${student.name} 
                         data-name=${student.name} 
-                        data-priority=${student.priority}
+                        data-priority=${student.priority + 1}
                         data-group=${color}>
                         <span class='badge'> ${student.lastChoice}</span>
                         <span class='glyphicon glyphicon-move' aria-hidden='true'></span>
@@ -123,7 +142,7 @@ function appendData(placements) {
       let student = {};
       student["name"] = $(this).attr("data-name");
       student["color"] = $(this).data("group");
-      student["priority"] = $(this).attr("data-priority");
+      student["priority"] = $(this).attr("data-priority") ;
       studentsExport.push(student);
     });
 

@@ -23,6 +23,9 @@ ol.example li.placeholder:before {
   justify-content: space-around;
 }
 
+#small-font{
+  font-size: 10px;
+}
 
 #body {
   width: 90%;

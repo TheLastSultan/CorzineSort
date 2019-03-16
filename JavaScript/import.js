@@ -26,7 +26,7 @@ $(document).ready(function() {
         var csvData = event.target.result;
         data = $.csv.toArrays(csvData);
         if (data && data.length > 0) {
-          alert("Imported -" + data.length + "- rows successfully!");
+          alert("Imported -" + data.length + "- Students successfully!" );
           console.log(data);
         } else {
           alert("No data to import!");

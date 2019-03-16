@@ -92,9 +92,10 @@ export default class CorzineSort {
       this.placeStudent(studentHash);
     });
 
-    // const sum = this.metrics.map( (el, idx) => { return el * idx}, 0)
-    // this.score = _.sum(sum)
-
+    // evaluate Score of each Corzine Sort
+    let sum = 0;
+    Object.values(this.metrics).forEach( (el, idx) => { sum +=  el * (idx + 1) });
+    this.score = sum;
   }
 
   announceMetrics() {
