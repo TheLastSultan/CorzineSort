@@ -1,11 +1,10 @@
 export default class Student {
   static parseStudents(studentsArray) {
-    studentsArray.shift();
     let allStudents = [];
-    studentsArray.forEach(studentArray => {
-      let oneStudent = new Student(studentArray);
+    for( let i = 1 ; i < studentsArray.length; i++){
+      let oneStudent = new Student(studentsArray[i]);
       allStudents.push(oneStudent);
-    });
+    };
     return allStudents;
   }
 
@@ -18,14 +17,7 @@ export default class Student {
   }
 
   parseChoices(studentArray) {
-    const choiceCodes = {
-      B: "Brown",
-      G: "Green",
-      R: "Red",
-      O: "Orange",
-      L: "Blue",
-      Y: "Yellow"
-    };
+
     let choices = [] ;
     for (let i = 2; i < 8; i++) {
       let letters = studentArray[i];
@@ -34,10 +26,10 @@ export default class Student {
     return choices;
   }
 
-  toJSON() {
-    return {
-      name: this.name,
-      priority: this.priority
-    };
-  }
+  // toJSON() {
+  //   return {
+  //     name: this.name,
+  //     priority: this.priority
+  //   };
+  // }
 }

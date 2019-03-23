@@ -1,3 +1,5 @@
+import { runInNewContext } from 'vm';
+
 const _ = require('lodash');
 
 export default class CorzineSort {
@@ -13,10 +15,11 @@ export default class CorzineSort {
     }
   ) {
     this.choiceCaps = choiceCaps;
-    this.placements = this.setPlacements();
+    this.placements = {"Red": [], "Blue": [] , "Green": [] , "Orange": [] , "Yellow": [], "Brown": []}
     this.studentHash = studentHash;
-    this.metrics = this.setMetrics();
+    this.metrics = this.setMetrics( );
     this.score = 0
+    this.popularity = this.setMetrics();
   }
 
   setPlacements() {
@@ -35,27 +38,12 @@ export default class CorzineSort {
     return metrics;
   }
 
-  placeStudent(studentObj) {
-    for (let i = 0; i < studentObj.choices.length ; i++) {
-      const color = this.encodedChoice(studentObj.choices[i]);
-      if (this.choiceCaps[color] >= (this.placements[color].length + 1)) {
-        this.placements[color].push(studentObj);
-        studentObj.placement = color;
-        studentObj.lastChoice = i + 1;
-        studentObj.priority = i;
-        this.metrics[i] += 1;
-        break;
-      }
-
-      if (i == Object.keys(this.choiceCaps).length) {
-        alert(studentObj.name + "was not placed!!");
-      }
-    }
-
-    return this.placements;
-  }
+  
 
   encodedChoice(studentChoice){
+    // encoded choice has two functions
+    // turns the letter into a name eg "B" => "Brown"
+    // takes care of equivalent choices "BG" => "Brown"
 
     const choiceCodes = {
       B: "Brown",
@@ -84,19 +72,59 @@ export default class CorzineSort {
     return bestChoice.codedChoice
   }
 
-  placeStudents(studentsHash = this.studentHash) {
 
-    let sortedStudents = _.sortBy( studentsHash, 'priority');
 
-    sortedStudents.forEach(studentHash => {
-      this.placeStudent(studentHash);
+  placeStudent(studentObj){
+    studentObj.lastChoice = 0 
+    let placed = false 
+    const choices = Object.freeze(studentObj.choices.map( choice => this.encodedChoice(choice)))
+    choices.forEach( (choice, idx) => {
+      const classCount = this.placements[choice].length
+      const classCapacity = this.choiceCaps[choice]
+      if(classCount < classCapacity && placed == false){
+        studentObj.placement = choice
+        studentObj.priority = idx 
+        studentObj.lastChoice = idx + 1 
+        this.metrics[idx] += 1 
+        this.placements[choice].push(studentObj)
+        placed = true
+      } 
+    })
+    if(!placed) alert(`${studentObj.name} has not been placed !`)
+  }
+
+
+
+  placeStudents() {
+
+    let sortedStudents = _.sortBy( this.studentHash, 'priority');
+    sortedStudents.forEach(student => {
+      let studentObj = this.placeStudent(student);
     });
 
     // evaluate Score of each Corzine Sort
     let sum = 0;
-    Object.values(this.metrics).forEach( (el, idx) => { sum +=  el * (idx + 1) });
+    Object.values(this.metrics).forEach( (el, idx) => { sum +=  (el + 1) ** (idx + 1) });
     this.score = sum;
+
   }
+
+  reversePlace(){
+
+
+
+  }
+
+  evaluatePopularity(){
+    let metrics = this.setMetrics; 
+    this.studentHash.forEach( student  => metrics[student.choices[0]] += 1 )
+    const keys = Object.keys(metrics)
+    keys.forEach( key => metrics[key] = ((metrics[key]) / studentHash.length) )
+    debugger; 
+    return metrics
+  }
+
+
 
   announceMetrics() {
     let message = "";

@@ -4,7 +4,6 @@ import exportFunction from "./export.js";
 import student from "./student";
 
 let studentsArray = undefined;
-let bestCorzine = undefined;
 
 $(document).ready(function() {
   // The event listener for the file upload
@@ -49,8 +48,19 @@ $(document).ready(function() {
   }
 });
 
+function iterationCopy(src) {
+  let target = {};
+  for (let prop in src) {
+    if (src.hasOwnProperty(prop)) {
+      target[prop] = src[prop];
+    }
+  }
+  return target;
+}
+
 function printOutData(studentsArray) {
-  let studentsHash = Student.parseStudents(studentsArray);
+  const studentsHash = Student.parseStudents(studentsArray);
+
   const choiceCaps = {
     Red: $('#redI').val(),
     Blue: $('#blueI').val(),
@@ -61,22 +71,25 @@ function printOutData(studentsArray) {
   };
 
 
-  // for (let i = 0 ; i < 100; i++)
-
-  bestCorzine = new CorzineSort(studentsHash, choiceCaps);
+  let bestCorzine = new CorzineSort(studentsHash, choiceCaps);
   bestCorzine.placeStudents();
-  for( let i = 0 ; i < 10000 ; i++){
-    studentsHash = _.shuffle(studentsHash);
-    const currCorzine = new CorzineSort(studentsHash, choiceCaps);
+  for( let i = 0 ; i < 100000; i++){
+    let newStudents = Student.parseStudents(studentsArray)
+    let newStudentHash = _.shuffle(newStudents);
+    let currCorzine = new CorzineSort(newStudentHash, choiceCaps);
     currCorzine.placeStudents();
+    if (currCorzine.score < 10 ) debugger
     if (currCorzine.score <= bestCorzine.score) bestCorzine = currCorzine
   }
   const placements = bestCorzine.placements;
-  appendData(placements);
+  debugger; 
+  appendData(bestCorzine);
 }
 
 
-function appendData(placements) {
+function appendData(bestCorzine) {
+  const placements = bestCorzine.placements
+
   // $("body").append($(`<p> ${bestCorzine.announceMetrics()} </p>`) );
   $("body").append($(`<br/> <div id="alert" class="alert alert-warning">
 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -102,13 +115,15 @@ function appendData(placements) {
       let newdiv = $(`<li class='list-group-item p-${student.priority}' 
                         id=${student.name} 
                         data-name=${student.name} 
-                        data-priority=${student.priority + 1}
+                        data-priority=${student.lastChoice}
+                        data-placement=${student.placement}
                         data-group=${color}>
                         <span class='badge'> ${student.lastChoice}</span>
                         <span class='glyphicon glyphicon-move' aria-hidden='true'></span>
                         ${student.name} 
                         </li>                 
       `);
+      if (color != student.placement) debugger; 
       ul.append(newdiv);
       if (student.lastChoice == 1) {
         newdiv.css("background-color", "lightgreen");
