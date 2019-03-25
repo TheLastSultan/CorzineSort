@@ -109,25 +109,6 @@ export default class CorzineSort {
 
   }
 
-  reversePlace(){
-    // let metrics = this.evaluatePopularity();
-    // let metricSort = []
-    // Object.keys(metrics).forEach( color => metricSort.push( { `${color}`: metrics[color]}))
-    // debugger; 
-
-
-  }
-
-  evaluatePopularity(){
-    // let metrics = {"R": 0, "B": 0 , "G": 0 , "O": 0 , "Y": 0, "B": 0, "L": 0}
-    // this.studentHash.forEach( student  => metrics[student.choices[0][0]] += 1 )
-    // const keys = Object.keys(metrics)
-    // keys.forEach( key => metrics[key] = ((metrics[key]) / this.studentHash.length) )
-    // return metrics
-  }
-
-
-
   announceMetrics() {
     let message = "";
     const metrics = this.metrics;
