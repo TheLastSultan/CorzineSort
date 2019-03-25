@@ -72,8 +72,8 @@ function printOutData(studentsArray) {
 
 
   let bestCorzine = new CorzineSort(studentsHash, choiceCaps);
-  bestCorzine.placeStudents();
-  for( let i = 0 ; i < 100000; i++){
+  bestCorzine.reversePlace();
+  for( let i = 0 ; i < 100; i++){
     let newStudents = Student.parseStudents(studentsArray)
     let newStudentHash = _.shuffle(newStudents);
     let currCorzine = new CorzineSort(newStudentHash, choiceCaps);
