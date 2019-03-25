@@ -72,13 +72,12 @@ function printOutData(studentsArray) {
 
 
   let bestCorzine = new CorzineSort(studentsHash, choiceCaps);
-  bestCorzine.reversePlace();
+  bestCorzine.placeStudents();
   for( let i = 0 ; i < 100; i++){
     let newStudents = Student.parseStudents(studentsArray)
     let newStudentHash = _.shuffle(newStudents);
     let currCorzine = new CorzineSort(newStudentHash, choiceCaps);
     currCorzine.placeStudents();
-    if (currCorzine.score < 10 ) debugger
     if (currCorzine.score <= bestCorzine.score) bestCorzine = currCorzine
   }
   const placements = bestCorzine.placements;
